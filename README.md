@@ -6,7 +6,9 @@
 
 An offline animated desktop companion for Windows, with a compact glass dashboard in the system tray. No account, server, browser runtime or AI API is required.
 
-![PetDesk dashboard in Windows](docs/screenshots/dashboard-en.jpg)
+<p align="center">
+  <img src="docs/screenshots/dashboard-preview.png" alt="PetDesk dashboard — Mochi Cat" width="440" />
+</p>
 
 [Five palettes and settings](docs/screenshots/settings-en.jpg) · [Russian dashboard](docs/screenshots/dashboard-ru.jpg)
 

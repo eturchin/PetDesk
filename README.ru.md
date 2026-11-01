@@ -6,7 +6,9 @@
 
 Локальный анимированный питомец поверх рабочего стола Windows и компактная панель управления в системном трее. Приложение работает без аккаунта, сервера и подключения к сети.
 
-![Панель PetDesk в Windows](docs/screenshots/dashboard-ru.jpg)
+<p align="center">
+  <img src="docs/screenshots/dashboard-preview.png" alt="Панель управления PetDesk — Mochi Cat" width="440" />
+</p>
 
 [Палитры и настройки](docs/screenshots/settings-en.jpg) · [Панель на английском](docs/screenshots/dashboard-en.jpg)
 
