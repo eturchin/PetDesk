@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PetDesk.Core/PetDesk.Core.csproj" />
+    <Project Path="src/PetDesk.Rendering/PetDesk.Rendering.csproj" />
+    <Project Path="src/PetDesk.Infrastructure/PetDesk.Infrastructure.csproj" />
+    <Project Path="src/PetDesk.App/PetDesk.App.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PetDesk.Core.Tests/PetDesk.Core.Tests.csproj" />
+    <Project Path="tests/PetDesk.Infrastructure.Tests/PetDesk.Infrastructure.Tests.csproj" />
+  </Folder>
+</Solution>

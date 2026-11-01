@@ -1,0 +1,28 @@
+<Project
+  Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <AssemblyName>PetDesk</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Resources/PetDesk.ico</ApplicationIcon>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource
+      Include="Resources/PetDesk.ico" />
+    <ProjectReference
+      Include="../PetDesk.Core/PetDesk.Core.csproj" />
+    <ProjectReference
+      Include="../PetDesk.Rendering/PetDesk.Rendering.csproj" />
+    <ProjectReference
+      Include="../PetDesk.Infrastructure/PetDesk.Infrastructure.csproj" />
+    <Content
+      Include="../../assets/builtin/**"
+      Link="Assets/BuiltIn/%(RecursiveDir)%(Filename)%(Extension)"
+      CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

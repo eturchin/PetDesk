@@ -1,0 +1,325 @@
+<UserControl
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:PetDesk.App.Presentation"
+  x:Class="PetDesk.App.Views.Pages.SettingsView">
+  <UserControl.Resources>
+    <Style
+      x:Key="PaletteButton"
+      TargetType="Button"
+      BasedOn="{StaticResource {x:Type Button}}">
+      <Setter
+        Property="Width"
+        Value="190" />
+      <Setter
+        Property="Height"
+        Value="78" />
+      <Setter
+        Property="Margin"
+        Value="4" />
+      <Setter
+        Property="Padding"
+        Value="9" />
+      <Setter
+        Property="HorizontalContentAlignment"
+        Value="Stretch" />
+      <Style.Triggers>
+        <DataTrigger
+          Binding="{Binding IsSelected}"
+          Value="True">
+          <Setter
+            Property="BorderBrush"
+            Value="{DynamicResource AccentBrush}" />
+          <Setter
+            Property="BorderThickness"
+            Value="2" />
+        </DataTrigger>
+      </Style.Triggers>
+    </Style>
+  </UserControl.Resources>
+  <StackPanel>
+    <Border
+      Style="{StaticResource Card}">
+      <StackPanel>
+        <TextBlock
+          Text="{ui:Loc Appearance.Title}"
+          Style="{StaticResource SectionTitle}" />
+        <TextBlock
+          Text="{ui:Loc Appearance.Mode}"
+          Style="{StaticResource CardMuted}"
+          Margin="0,0,0,6" />
+        <ComboBox
+          SelectedIndex="{Binding ThemeIndex}"
+          AutomationProperties.Name="{ui:Loc Appearance.Mode}">
+          <ComboBoxItem
+            Content="{ui:Loc Appearance.System}" />
+          <ComboBoxItem
+            Content="{ui:Loc Appearance.Light}" />
+          <ComboBoxItem
+            Content="{ui:Loc Appearance.Dark}" />
+        </ComboBox>
+        <TextBlock
+          Text="{ui:Loc Appearance.Palettes}"
+          Style="{StaticResource CardMuted}"
+          Margin="0,14,0,5" />
+        <ItemsControl
+          ItemsSource="{Binding Palettes}"
+          HorizontalAlignment="Center">
+          <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+              <WrapPanel />
+            </ItemsPanelTemplate>
+          </ItemsControl.ItemsPanel>
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Button
+                Style="{StaticResource PaletteButton}"
+                Command="{Binding DataContext.UsePaletteCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                CommandParameter="{Binding}"
+                AutomationProperties.Name="{Binding Name}">
+                <Grid>
+                  <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition
+                      Height="18" />
+                  </Grid.RowDefinitions>
+                  <TextBlock
+                    Text="{Binding Name}"
+                    FontSize="13"
+                    TextTrimming="CharacterEllipsis"
+                    VerticalAlignment="Center" />
+                  <ui:Icon
+                    Kind="Check"
+                    Width="15"
+                    Height="15"
+                    HorizontalAlignment="Right"
+                    Foreground="{DynamicResource AccentBrush}"
+                    Visibility="{Binding IsSelected, Converter={StaticResource BoolVisibility}}" />
+                  <UniformGrid
+                    Grid.Row="1"
+                    Columns="5">
+                    <Border
+                      Background="{Binding Background}"
+                      CornerRadius="4,0,0,4" />
+                    <Border
+                      Background="{Binding Surface}" />
+                    <Border
+                      Background="{Binding Primary}" />
+                    <Border
+                      Background="{Binding Accent}" />
+                    <Border
+                      Background="{Binding Definition.Glow}"
+                      CornerRadius="0,4,4,0" />
+                  </UniformGrid>
+                </Grid>
+              </Button>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Button
+          Content="{ui:Loc Appearance.Custom}"
+          Command="{Binding CreatePaletteCommand}"
+          Margin="0,10,0,7"
+          Style="{StaticResource PrimaryButton}" />
+        <UniformGrid
+          Columns="2">
+          <Button
+            Content="{ui:Loc Appearance.Edit}"
+            Command="{Binding EditPaletteCommand}"
+            FontSize="11"
+            Margin="0,0,4,0" />
+          <Button
+            Content="{ui:Loc Palette.Delete}"
+            Command="{Binding DeletePaletteCommand}"
+            FontSize="11"
+            Margin="4,0,0,0" />
+        </UniformGrid>
+        <Button
+          Content="{ui:Loc Appearance.Reset}"
+          Command="{Binding ResetAppearanceCommand}"
+          Margin="0,8,0,0"
+          FontSize="12" />
+      </StackPanel>
+    </Border>
+    <Border
+      Style="{StaticResource Card}"
+      Margin="0,12,0,0">
+      <StackPanel>
+        <TextBlock
+          Text="{ui:Loc Library.Manage}"
+          Style="{StaticResource SectionTitle}" />
+        <UniformGrid
+          Columns="2">
+          <Button
+            Content="{ui:Loc Library.Import}"
+            Command="{Binding ImportFileCommand}"
+            Margin="0,0,4,0"
+            FontSize="11" />
+          <Button
+            Content="{ui:Loc Library.ImportFolder}"
+            Command="{Binding ImportFolderCommand}"
+            Margin="4,0,0,0"
+            FontSize="11" />
+        </UniformGrid>
+        <Button
+          Content="{ui:Loc Library.Folder}"
+          Command="{Binding OpenFolderCommand}"
+          CommandParameter="pets"
+          Margin="0,8,0,10"
+          FontSize="12" />
+        <ItemsControl
+          ItemsSource="{Binding LibraryPets}">
+          <ItemsControl.ItemTemplate>
+            <DataTemplate>
+              <Grid
+                Margin="0,5">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition
+                    Width="41" />
+                  <ColumnDefinition />
+                  <ColumnDefinition
+                    Width="34" />
+                </Grid.ColumnDefinitions>
+                <Image
+                  Source="{Binding Thumbnail}"
+                  Width="34"
+                  Height="34" />
+                <StackPanel
+                  Grid.Column="1"
+                  VerticalAlignment="Center">
+                  <TextBlock
+                    Text="{Binding Name}"
+                    TextTrimming="CharacterEllipsis" />
+                  <TextBlock
+                    Text="{Binding KindLabel}"
+                    Style="{StaticResource CardMuted}"
+                    FontSize="10" />
+                </StackPanel>
+                <Button
+                  Grid.Column="2"
+                  Style="{StaticResource IconButton}"
+                  Width="32"
+                  Height="32"
+                  Command="{Binding DataContext.DeletePetCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                  CommandParameter="{Binding}"
+                  ToolTip="{ui:Loc Library.Delete}"
+                  AutomationProperties.Name="{ui:Loc Library.Delete}">
+                  <ui:Icon
+                    Kind="Trash"
+                    Width="16"
+                    Height="16" />
+                </Button>
+              </Grid>
+            </DataTemplate>
+          </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <TextBlock
+          Text="{Binding PetDetails}"
+          Style="{StaticResource CardMuted}"
+          FontSize="11"
+          Margin="0,12,0,0" />
+        <TextBlock
+          Text="{ui:Loc Library.Formats}"
+          Style="{StaticResource CardMuted}"
+          FontSize="11"
+          Margin="0,7,0,0" />
+      </StackPanel>
+    </Border>
+    <Border
+      Style="{StaticResource Card}"
+      Margin="0,12,0,0">
+      <StackPanel>
+        <TextBlock
+          Text="{ui:Loc Windows.Title}"
+          Style="{StaticResource SectionTitle}" />
+        <Grid
+          Margin="0,5">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition
+              Width="44" />
+          </Grid.ColumnDefinitions>
+          <TextBlock
+            Text="{ui:Loc Windows.Autostart}"
+            TextWrapping="Wrap"
+            VerticalAlignment="Center"
+            Margin="0,0,12,0" />
+          <CheckBox
+            Grid.Column="1"
+            Style="{StaticResource Switch}"
+            IsChecked="{Binding Autostart}"
+            AutomationProperties.Name="{ui:Loc Windows.Autostart}" />
+        </Grid>
+        <Grid
+          Margin="0,7">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition
+              Width="44" />
+          </Grid.ColumnDefinitions>
+          <TextBlock
+            Text="{ui:Loc Windows.Hidden}"
+            TextWrapping="Wrap"
+            VerticalAlignment="Center"
+            Margin="0,0,12,0" />
+          <CheckBox
+            Grid.Column="1"
+            Style="{StaticResource Switch}"
+            IsChecked="{Binding StartHidden}"
+            AutomationProperties.Name="{ui:Loc Windows.Hidden}" />
+        </Grid>
+        <Grid
+          Margin="0,7">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition
+              Width="44" />
+          </Grid.ColumnDefinitions>
+          <TextBlock
+            Text="{ui:Loc Windows.Restore}"
+            TextWrapping="Wrap"
+            VerticalAlignment="Center"
+            Margin="0,0,12,0" />
+          <CheckBox
+            Grid.Column="1"
+            Style="{StaticResource Switch}"
+            IsChecked="{Binding RestorePosition}"
+            AutomationProperties.Name="{ui:Loc Windows.Restore}" />
+        </Grid>
+        <Button
+          Content="{ui:Loc Windows.Reset}"
+          Command="{Binding ResetPositionCommand}"
+          Margin="0,8,0,8" />
+        <TextBlock
+          Text="{ui:Loc Windows.AutostartHint}"
+          Style="{StaticResource CardMuted}"
+          FontSize="11" />
+      </StackPanel>
+    </Border>
+    <Border
+      Style="{StaticResource Card}"
+      Margin="0,12,0,0">
+      <StackPanel>
+        <TextBlock
+          Text="{ui:Loc Behavior.Activity}" />
+        <Slider
+          Minimum="0"
+          Maximum="100"
+          Value="{Binding ActivityPercent}"
+          AutomationProperties.Name="{ui:Loc Behavior.Activity}"
+          Margin="0,8" />
+        <UniformGrid
+          Columns="2">
+          <Button
+            Content="{ui:Loc Behavior.Wave}"
+            Command="{Binding WaveCommand}"
+            Margin="0,0,4,0" />
+          <Button
+            Content="{ui:Loc Behavior.Jump}"
+            Command="{Binding JumpCommand}"
+            Margin="4,0,0,0" />
+        </UniformGrid>
+      </StackPanel>
+    </Border>
+  </StackPanel>
+</UserControl>

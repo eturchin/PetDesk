@@ -1,0 +1,15 @@
+<Project
+  Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference
+      Include="../PetDesk.Core/PetDesk.Core.csproj" />
+    <ProjectReference
+      Include="../PetDesk.Rendering/PetDesk.Rendering.csproj" />
+    <PackageReference
+      Include="Microsoft.Extensions.Logging" />
+  </ItemGroup>
+</Project>

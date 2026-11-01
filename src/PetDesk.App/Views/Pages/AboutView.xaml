@@ -1,0 +1,42 @@
+<UserControl
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:ui="clr-namespace:PetDesk.App.Presentation"
+  x:Class="PetDesk.App.Views.Pages.AboutView">
+  <StackPanel
+    Margin="0,12">
+    <ui:Icon
+      Kind="Paw"
+      Width="65"
+      Height="65"
+      Foreground="{DynamicResource AccentBrush}"
+      HorizontalAlignment="Center" />
+    <TextBlock
+      Text="PetDesk"
+      FontSize="28"
+      FontWeight="SemiBold"
+      HorizontalAlignment="Center"
+      Margin="0,12,0,5" />
+    <TextBlock
+      Text="{Binding AppVersion}"
+      Style="{StaticResource Muted}"
+      HorizontalAlignment="Center" />
+    <TextBlock
+      Text="{ui:Loc About.Description}"
+      TextWrapping="Wrap"
+      TextAlignment="Center"
+      Margin="20,22,20,12" />
+    <TextBlock
+      Text="{ui:Loc About.Local}"
+      Style="{StaticResource Muted}"
+      TextAlignment="Center"
+      Margin="20,0,20,24" />
+    <Border
+      Style="{StaticResource Card}">
+      <TextBlock
+        Text="{ui:Loc About.License}"
+        TextWrapping="Wrap"
+        LineHeight="21" />
+    </Border>
+  </StackPanel>
+</UserControl>

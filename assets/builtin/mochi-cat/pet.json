@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "builtin-mochi-cat",
+  "name": "Mochi Cat",
+  "spriteSheet": "spritesheet.png",
+  "frameWidth": 192,
+  "frameHeight": 208,
+  "columns": 6,
+  "rows": 3,
+  "animations": {
+    "idle": {
+      "row": 0,
+      "startColumn": 0,
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "frameDurationsMs": null
+    },
+    "walkRight": {
+      "row": 1,
+      "startColumn": 0,
+      "frames": 6,
+      "fps": 8,
+      "loop": true,
+      "frameDurationsMs": null
+    },
+    "walkLeft": {
+      "row": 2,
+      "startColumn": 0,
+      "frames": 6,
+      "fps": 8,
+      "loop": true,
+      "frameDurationsMs": null
+    }
+  }
+}
